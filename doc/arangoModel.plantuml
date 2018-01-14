@@ -1,0 +1,11 @@
+@startuml
+
+run "1" *-- "many" testcase : aggregation
+run "1" *-- "many" runlog : aggregation
+
+testcase "1" *-- "many" step : aggregation
+testcase "1" *-- "many" testcaselog : aggregation
+
+step "1" *-- "many" steplog : aggregation
+
+@enduml

@@ -1,0 +1,8 @@
+== ArangoDB LogAdapter
+This logger will write the logs to an ArangoDB data base
+
+
+[plantuml, diagram-classes, png]
+----
+include::arangoModel.plantuml[]
+----
