@@ -11,7 +11,7 @@ sleep 2
 n=0
 # timeout value for startup
 timeout=60
-while [[ (-z `curl -H 'Authorization: Basic cm9vdDp0ZXN0' -s 'http://127.0.0.1:8529/_api/version' `) && (n -lt timeout) ]] ; do
+while [[ (-z `curl -H 'Authorization: Basic cm9vdDpyb290' -s 'http://127.0.0.1:8529/_api/version' `) && (n -lt timeout) ]] ; do
   echo -n "."
   sleep 1s
   n=$[$n+1]
@@ -25,4 +25,4 @@ fi
 
 echo "ArangoDB is up"
 
-node ./setupLogDB
+node ./tests/setupLogDB
