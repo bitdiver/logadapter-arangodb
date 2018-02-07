@@ -25,10 +25,13 @@ export function getArangoDb(opts = {}) {
  * @param db {object} The arangoDB object
  */
 export async function printCollections(db) {
+  // eslint-disable-next-line no-console
   console.log('printCollections')
   const collections = await db.listCollections()
+  // eslint-disable-next-line no-console
   console.log('collections', collections)
   collections.forEach(collection => {
+    // eslint-disable-next-line no-console
     console.log(`Collection => ${collection}`)
   })
 }

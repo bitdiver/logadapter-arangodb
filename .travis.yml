@@ -21,6 +21,8 @@ before_install:
 before_script:
 - npm prune
 - npm install -g codecov
+- chmod 777 ./tests/travis_setup_arangodb.sh
+- ./tests/travis_setup_arangodb.sh
 script:
 - npm run test
 after_script:

@@ -6,6 +6,15 @@ import { clearDatabase } from '../lib/helper'
 
 const TIMEOUT = 30000
 
+// const arangoOpts = {
+//   scheme: 'http',
+//   hostname: 'localhost',
+//   port: 8529,
+//   database: 'log',
+//   username: 'log',
+//   password: 'log',
+// }
+
 const logAdapter = getLogAdapter()
 
 test(
