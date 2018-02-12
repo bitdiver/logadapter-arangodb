@@ -30,4 +30,4 @@ script:
 after_script:
 - codecov
 after_success:
-- npm run semantic-release
+- npx semantic-release
