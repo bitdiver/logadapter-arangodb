@@ -4,7 +4,7 @@ echo "Start setup ArangoDB"
 
 
 docker pull arangodb/arangodb:latest
-docker run -d -e ARANGO_ROOT_PASSWORD="root" -p 8529:8529 arangodb/arangodb-preview:nightly.devel
+docker run -d -e ARANGO_ROOT_PASSWORD="root" -p 8529:8529 arangodb/arangodb:latest
 
 sleep 2
 
