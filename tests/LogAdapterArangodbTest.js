@@ -45,7 +45,7 @@ test(
 
     // we expect that there is only one record
     expect(res.runData.length).toBe(1)
-    expect(res.runLogData.length).toBe(0)
+    expect(res.runLogData.length).toBe(1)
     expect(res.tcData.length).toBe(0)
     expect(res.tcLogData.length).toBe(0)
     expect(res.stepData.length).toBe(0)
@@ -79,7 +79,7 @@ test(
 
     // we expect that there is only one record
     expect(res.runData.length).toBe(1)
-    expect(res.runLogData.length).toBe(2)
+    expect(res.runLogData.length).toBe(3)
     expect(res.tcData.length).toBe(0)
     expect(res.tcLogData.length).toBe(0)
     expect(res.stepData.length).toBe(0)
@@ -89,12 +89,12 @@ test(
     expect(runData._key).toEqual('r1')
     expect(runData.data.val).toEqual('my run message')
 
-    const runData1 = res.runLogData[0]
+    const runData1 = res.runLogData[1]
     // console.log('runData1', runData1)
     expect(runData1._key).not.toEqual('r1')
     expect(runData1.data.val).toEqual('second entry')
 
-    const runData2 = res.runLogData[1]
+    const runData2 = res.runLogData[2]
     // console.log('runData2', runData2)
     expect(runData2._key).not.toEqual('r1')
     expect(runData2.data.val).toEqual('third entry')
@@ -118,9 +118,9 @@ test(
 
     // we expect that there is only one record
     expect(res.runData.length).toBe(1)
-    expect(res.runLogData.length).toBe(0)
+    expect(res.runLogData.length).toBe(1)
     expect(res.tcData.length).toBe(1)
-    expect(res.tcLogData.length).toBe(0)
+    expect(res.tcLogData.length).toBe(1)
     expect(res.stepData.length).toBe(0)
     expect(res.stepLogData.length).toBe(0)
 
@@ -155,9 +155,9 @@ test(
 
     // we expect that there is only one record
     expect(res.runData.length).toBe(1)
-    expect(res.runLogData.length).toBe(0)
+    expect(res.runLogData.length).toBe(1)
     expect(res.tcData.length).toBe(1)
-    expect(res.tcLogData.length).toBe(2)
+    expect(res.tcLogData.length).toBe(3)
     expect(res.stepData.length).toBe(0)
     expect(res.stepLogData.length).toBe(0)
 
@@ -171,12 +171,12 @@ test(
     expect(tcData.meta.tc.name).toEqual('my test case')
     expect(tcData.data.val).toEqual('my tc message')
 
-    const tcData1 = res.tcLogData[0]
+    const tcData1 = res.tcLogData[1]
     // console.log('tcData1', tcData1)
     expect(tcData1.meta.tc.name).toEqual('my test case')
     expect(tcData1.data.val).toEqual('my tc message 1')
 
-    const tcData2 = res.tcLogData[1]
+    const tcData2 = res.tcLogData[2]
     // console.log('tcData2', tcData2)
     expect(tcData2.meta.tc.name).toEqual('my test case')
     expect(tcData2.data.val).toEqual('my tc message 2')
@@ -201,11 +201,11 @@ test(
 
     // we expect that there is only one record
     expect(res.runData.length).toBe(1)
-    expect(res.runLogData.length).toBe(0)
+    expect(res.runLogData.length).toBe(1)
     expect(res.tcData.length).toBe(1)
-    expect(res.tcLogData.length).toBe(0)
+    expect(res.tcLogData.length).toBe(1)
     expect(res.stepData.length).toBe(1)
-    expect(res.stepLogData.length).toBe(0)
+    expect(res.stepLogData.length).toBe(1)
 
     const runData = res.runData[0]
     expect(runData._key).toEqual('r1')
@@ -246,11 +246,11 @@ test(
 
     // we expect that there is only one record
     expect(res.runData.length).toBe(1)
-    expect(res.runLogData.length).toBe(0)
+    expect(res.runLogData.length).toBe(1)
     expect(res.tcData.length).toBe(1)
-    expect(res.tcLogData.length).toBe(0)
+    expect(res.tcLogData.length).toBe(1)
     expect(res.stepData.length).toBe(1)
-    expect(res.stepLogData.length).toBe(2)
+    expect(res.stepLogData.length).toBe(3)
 
     const runData = res.runData[0]
     expect(runData._key).toEqual('r1')
@@ -269,13 +269,13 @@ test(
     expect(stepData.meta.step.name).toEqual('my step')
     expect(stepData.data.val).toEqual('my step message')
 
-    const stepData1 = res.stepLogData[0]
+    const stepData1 = res.stepLogData[1]
     // console.log('tcData1', tcData1)
     expect(stepData.meta.tc.name).toEqual('my test case')
     expect(stepData1.meta.step.name).toEqual('my step')
     expect(stepData1.data.val).toEqual('my step message 1')
 
-    const stepData2 = res.stepLogData[1]
+    const stepData2 = res.stepLogData[2]
     // console.log('tcData1', tcData1)
     expect(stepData.meta.tc.name).toEqual('my test case')
     expect(stepData2.meta.step.name).toEqual('my step')

@@ -27,10 +27,9 @@ const db = new Database({ url })
 db.useDatabase(arangoSystem.database)
 db.useBasicAuth(arangoSystem.username, arangoSystem.password)
 
-db
-  .createDatabase(arangoLog.database, [
-    { username: arangoLog.username, passwd: arangoLog.password },
-  ])
+db.createDatabase(arangoLog.database, [
+  { username: arangoLog.username, passwd: arangoLog.password },
+])
   .then(() => {
     console.log('Log DB created')
   })

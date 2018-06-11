@@ -63,17 +63,16 @@ export class LogAdapterArangodb extends LogAdapter {
       this.runKey = key
       const runCollection = this.db.collection('run')
       await runCollection.save({ _key: key, meta, data })
-    } else {
-      // this is an additional log for this run
-      const collection = this.db.collection('runLog')
-      const rec = await collection.save({ meta, data })
-
-      const edgeCollection = this.db.collection('runHasLog')
-      await edgeCollection.save({
-        _from: `run/${key}`,
-        _to: rec._id,
-      })
     }
+    // this is an additional log for this run
+    const collection = this.db.collection('runLog')
+    const rec = await collection.save({ meta, data })
+
+    const edgeCollection = this.db.collection('runHasLog')
+    await edgeCollection.save({
+      _from: `run/${key}`,
+      _to: rec._id,
+    })
   }
 
   async _logTestcase(meta, data) {
@@ -95,17 +94,16 @@ export class LogAdapterArangodb extends LogAdapter {
         _from: `run/${runKey}`,
         _to: `testcase/${tcKey}`,
       })
-    } else {
-      // this is an additional log for this testcase
-      const collection = this.db.collection('testcaseLog')
-      const rec = await collection.save({ meta, data })
-
-      const edgeCollection = this.db.collection('testcaseHasLog')
-      await edgeCollection.save({
-        _from: `testcase/${tcKey}`,
-        _to: rec._id,
-      })
     }
+    // this is an additional log for this testcase
+    const collection = this.db.collection('testcaseLog')
+    const rec = await collection.save({ meta, data })
+
+    const edgeCollection = this.db.collection('testcaseHasLog')
+    await edgeCollection.save({
+      _from: `testcase/${tcKey}`,
+      _to: rec._id,
+    })
   }
 
   async _logStep(meta, data) {
@@ -127,17 +125,16 @@ export class LogAdapterArangodb extends LogAdapter {
         _from: `testcase/${tcKey}`,
         _to: `step/${stepKey}`,
       })
-    } else {
-      // this is an additional log for this step
-      const collection = this.db.collection('stepLog')
-      const rec = await collection.save({ meta, data })
-
-      const edgeCollection = this.db.collection('stepHasLog')
-      await edgeCollection.save({
-        _from: `step/${stepKey}`,
-        _to: rec._id,
-      })
     }
+    // this is an additional log for this step
+    const collection = this.db.collection('stepLog')
+    const rec = await collection.save({ meta, data })
+
+    const edgeCollection = this.db.collection('stepHasLog')
+    await edgeCollection.save({
+      _from: `step/${stepKey}`,
+      _to: rec._id,
+    })
   }
 }
 
