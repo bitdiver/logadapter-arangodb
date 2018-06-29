@@ -57,6 +57,6 @@
   },
   "dependencies": {
     "@bitdiver/model": "1.2.3",
-    "arangojs": "6.2.4"
+    "arangojs": "6.3.0"
   }
 }
