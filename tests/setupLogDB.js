@@ -21,6 +21,7 @@ const arangoLog = {
 const url = `${arangoSystem.scheme}://${arangoSystem.hostname}:${
   arangoSystem.port
 }`
+// eslint-disable-next-line no-console
 console.log(`Connect to '${url}'`)
 
 const db = new Database({ url })
@@ -31,8 +32,10 @@ db.createDatabase(arangoLog.database, [
   { username: arangoLog.username, passwd: arangoLog.password },
 ])
   .then(() => {
+    // eslint-disable-next-line no-console
     console.log('Log DB created')
   })
   .catch(err => {
+    // eslint-disable-next-line no-console
     console.log(err)
   })
