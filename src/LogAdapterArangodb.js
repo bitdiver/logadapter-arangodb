@@ -4,6 +4,7 @@ import assert from 'assert'
 import { Database } from 'arangojs'
 import { LogAdapter } from '@bitdiver/model'
 import { setupArango } from './helper'
+import md5 from 'md5'
 
 export class LogAdapterArangodb extends LogAdapter {
   constructor(opts = {}) {
@@ -31,8 +32,14 @@ export class LogAdapterArangodb extends LogAdapter {
     // stores all the id of the testcases
     this.testcaseSet = new Set()
 
+    // stores a combined key of testcase_id and step_id
+    this.testcaseHasStepSet = new Set()
+
     // stores all the id of the steps
     this.stepSet = new Set()
+
+    // stores a md5 hash of the logged data
+    this.stepDataSet = new Set()
   }
 
   /**
@@ -43,6 +50,8 @@ export class LogAdapterArangodb extends LogAdapter {
     this.runKey = undefined
     this.testcaseSet = new Set()
     this.stepSet = new Set()
+    this.stepDataSet = new Set()
+    this.testcaseHasStepSet = new Set()
   }
 
   /**
@@ -112,29 +121,47 @@ export class LogAdapterArangodb extends LogAdapter {
 
     const tcKey = meta.tc.id
     const stepKey = meta.step.id
+    const tcStepKey = `${tcKey}#${stepKey}`
 
+    // First check if this step has been logged
     if (!this.stepSet.has(stepKey)) {
+      // delete old values
+      this.stepSet = new Set()
+      this.testcaseHasStepSet = new Set()
+      this.stepDataSet = new Set()
+
       // There is no entry for this test case yet
       this.stepSet.add(stepKey)
       const collection = this.db.collection('step')
       await collection.save({ _key: stepKey, meta, data })
+    }
 
+    if (!this.testcaseHasStepSet.has(tcStepKey)) {
       // add the step to the testcase
+      this.testcaseHasStepSet.add(tcStepKey)
+
       const testcaseHasStepColl = this.db.collection('testcaseHasStep')
       await testcaseHasStepColl.save({
         _from: `testcase/${tcKey}`,
         _to: `step/${stepKey}`,
       })
     }
-    // this is an additional log for this step
-    const collection = this.db.collection('stepLog')
-    const rec = await collection.save({ meta, data })
 
-    const edgeCollection = this.db.collection('stepHasLog')
-    await edgeCollection.save({
-      _from: `step/${stepKey}`,
-      _to: rec._id,
-    })
+    const dataString = JSON.stringify(data)
+    const dataMd5 = md5(dataString)
+    if (!this.stepDataSet.has(dataMd5)) {
+      this.stepDataSet.add(dataMd5)
+
+      // this is an additional log for this step
+      const collection = this.db.collection('stepLog')
+      const rec = await collection.save({ meta, data })
+
+      const edgeCollection = this.db.collection('stepHasLog')
+      await edgeCollection.save({
+        _from: `step/${stepKey}`,
+        _to: rec._id,
+      })
+    }
   }
 }
 

@@ -286,6 +286,61 @@ test(
   TIMEOUT
 )
 
+test(
+  'Step: simulate single step',
+  async done => {
+    logAdapter.reset()
+    await clearDatabase(logAdapter.db)
+
+    await logAdapter.log(getRunLog())
+    await logAdapter.log(getTcLog())
+    await logAdapter.log(getTcLog({ tcId: 'tc2' }))
+    await logAdapter.log(getStepLog({ tcId: 'tc1' }))
+    await logAdapter.log(getStepLog({ tcId: 'tc2' }))
+
+    const res = await retrieveData(logAdapter.db)
+    // console.log('res', res)
+
+    // we expect that there is only one record
+    expect(res.runData.length).toBe(1)
+    expect(res.runLogData.length).toBe(1)
+    expect(res.tcData.length).toBe(2)
+    expect(res.tcLogData.length).toBe(2)
+    expect(res.stepData.length).toBe(1)
+    expect(res.stepLogData.length).toBe(1)
+
+    const runData = res.runData[0]
+    expect(runData._key).toEqual('r1')
+    expect(runData.data.val).toEqual('my run message')
+
+    const tcData = res.tcData[0]
+    const tcData1 = res.tcData[1]
+
+    expect(tcData.meta.tc.name).toEqual('my test case')
+    expect(tcData.data.val).toEqual('my tc message')
+
+    expect(tcData1.meta.tc.name).toEqual('my test case')
+    expect(tcData1.data.val).toEqual('my tc message')
+
+    if (tcData._key === 'tc1') {
+      expect(tcData1._key).toEqual('tc2')
+    } else {
+      expect(tcData1._key).toEqual('tc1')
+      expect(tcData._key).toEqual('tc2')
+    }
+
+    const stepData = res.stepData[0]
+    // console.log('tcData', tcData)
+    expect(stepData._key).toEqual('step1')
+    expect(stepData.meta.tc.name).toEqual('my test case')
+    expect(stepData.meta.step.name).toEqual('my step')
+    expect(stepData.data.val).toEqual('my step message')
+
+    done()
+  },
+  TIMEOUT
+)
+
 /**
  * Creates a run log message
  * @param runId {string} The run id.
