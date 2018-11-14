@@ -122,6 +122,17 @@ export class LogAdapterArangodb extends LogAdapter {
     const tcKey = meta.tc.id
     const stepKey = meta.step.id
     const tcStepKey = `${tcKey}#${stepKey}`
+    const currentStepCount = meta.step.countCurrent
+
+    // If the step count increases, the old sets could be deleted
+    if (currentStepCount > this.lastStepCount) {
+      // delete old values
+      this.stepSet = new Set()
+      this.testcaseHasStepSet = new Set()
+      this.stepDataSet = new Set()
+
+      this.lastStepCount = currentStepCount
+    }
 
     // First check if this step has been logged
     if (!this.stepSet.has(stepKey)) {
