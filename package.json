@@ -1,7 +1,6 @@
 {
   "name": "@bitdiver/logadapter-arangodb",
-  "version": "1.0.6",
-  "gumbo": "0.0.0-semantic-release",
+  "version": "0.0.0-semantic-release",
   "description": "",
   "main": "lib/index.js",
   "repository": {

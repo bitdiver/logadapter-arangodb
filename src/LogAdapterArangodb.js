@@ -136,11 +136,6 @@ export class LogAdapterArangodb extends LogAdapter {
 
     // First check if this step has been logged
     if (!this.stepSet.has(stepKey)) {
-      // delete old values
-      this.stepSet = new Set()
-      this.testcaseHasStepSet = new Set()
-      this.stepDataSet = new Set()
-
       // There is no entry for this test case yet
       this.stepSet.add(stepKey)
       const collection = this.db.collection('step')
