@@ -8,7 +8,7 @@ import md5 from 'md5'
 
 export class LogAdapterArangodb extends LogAdapter {
   constructor(opts = {}) {
-    super()
+    super(opts)
 
     const scheme = opts.scheme || 'http'
     const host = opts.hostname || 'localhost'
