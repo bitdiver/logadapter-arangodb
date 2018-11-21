@@ -7,7 +7,6 @@ import { clearDatabase } from '../lib/helper'
 const TIMEOUT = 30000
 
 const logAdapter = getLogAdapter({
-  logLevel: 'debug',
   scheme: 'http',
   hostname: 'localhost',
   port: 8529,
@@ -16,6 +15,7 @@ const logAdapter = getLogAdapter({
   password: 'log',
 })
 
+logAdapter.logAdapterLogLevel = 'warning'
 // const logAdapter = getLogAdapter()
 
 test(
