@@ -15,7 +15,7 @@ const logAdapter = getLogAdapter({
   password: 'log',
 })
 
-logAdapter.logAdapterLogLevel = 'warning'
+logAdapter.logAdapterLogLevel = 'debug'
 // const logAdapter = getLogAdapter()
 
 test(
