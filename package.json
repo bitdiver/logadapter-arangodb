@@ -60,7 +60,7 @@
 		"uuid": "3.3.2"
 	},
 	"dependencies": {
-		"@bitdiver/logadapter": "1.0.1",
+		"@bitdiver/logadapter": "1.0.2",
 		"arangojs": "6.9.0",
 		"md5": "2.2.1"
 	}

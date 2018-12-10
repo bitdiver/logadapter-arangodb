@@ -362,7 +362,7 @@ function getRunLog(opts = {}) {
     data: {
       val: options.message,
     },
-    logLevel: 'debug',
+    logLevel: 'error',
   }
 }
 
@@ -394,7 +394,7 @@ function getTcLog(opts = {}) {
     data: {
       val: options.message,
     },
-    logLevel: 'debug',
+    logLevel: 'error',
   }
 }
 
@@ -437,7 +437,7 @@ function getStepLog(opts = {}) {
     data: {
       val: options.message,
     },
-    logLevel: 'debug',
+    logLevel: 'error',
   }
 }
 
