@@ -6,16 +6,17 @@ import { clearDatabase } from '../lib/helper'
 
 const TIMEOUT = 30000
 
-// const arangoOpts = {
-//   scheme: 'http',
-//   hostname: 'localhost',
-//   port: 8529,
-//   database: 'log',
-//   username: 'log',
-//   password: 'log',
-// }
+const logAdapter = getLogAdapter({
+  scheme: 'http',
+  hostname: 'localhost',
+  port: 8529,
+  database: 'log',
+  username: 'log',
+  password: 'log',
+})
 
-const logAdapter = getLogAdapter()
+logAdapter.logAdapterLogLevel = 'debug'
+// const logAdapter = getLogAdapter()
 
 test(
   'create a new logAdapter',
@@ -361,6 +362,7 @@ function getRunLog(opts = {}) {
     data: {
       val: options.message,
     },
+    logLevel: 'debug',
   }
 }
 
@@ -392,6 +394,7 @@ function getTcLog(opts = {}) {
     data: {
       val: options.message,
     },
+    logLevel: 'debug',
   }
 }
 
@@ -434,6 +437,7 @@ function getStepLog(opts = {}) {
     data: {
       val: options.message,
     },
+    logLevel: 'debug',
   }
 }
 
