@@ -26,3 +26,7 @@ fi
 echo "ArangoDB is up"
 
 node ./tests/setupLogDB
+
+sleep 6
+
+echo "Arango LOG database created"
