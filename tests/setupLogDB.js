@@ -10,7 +10,7 @@ const arangoSystem = {
   port: 8529,
   database: '_system',
   username: 'root',
-  password: 'root',
+  password: '',
 }
 const arangoLog = {
   database: 'log',
