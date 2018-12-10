@@ -2,13 +2,13 @@
 
 import assert from 'assert'
 import { Database } from 'arangojs'
-import { LogAdapter } from '@bitdiver/model'
+import { LogAdapterConsole } from '@bitdiver/logadapter'
 import { setupArango } from './helper'
 import md5 from 'md5'
 
-export class LogAdapterArangodb extends LogAdapter {
+export class LogAdapterArangodb extends LogAdapterConsole {
   constructor(opts = {}) {
-    super()
+    super(opts)
 
     const scheme = opts.scheme || 'http'
     const host = opts.hostname || 'localhost'
@@ -169,17 +169,4 @@ export class LogAdapterArangodb extends LogAdapter {
       })
     }
   }
-}
-
-// Stores the logger instance
-let logAdapter
-
-/**
- * returns the logAdapter
- */
-export function getLogAdapter(opts) {
-  if (logAdapter === undefined) {
-    logAdapter = new LogAdapterArangodb(opts)
-  }
-  return logAdapter
 }

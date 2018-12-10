@@ -438,23 +438,23 @@ function getStepLog(opts = {}) {
 }
 
 /*
-*     const logMessage = {
-*       meta:{
-*         run:{
-*           start: <time>,
-*           id: 'id'
-*         },
-*         tc:{
-*           id: 'id',
-*           name: 'great tc name'
-*         },
-*         step:{
-*           id: 'id',
-*           name: 'great step name'
-*           typ: ('singel'| ''|)
-*         }
-*       }
-*       data:{},
-*       logLevel: LEVEL_INFO
-*     }
-*/
+ *     const logMessage = {
+ *       meta:{
+ *         run:{
+ *           start: <time>,
+ *           id: 'id'
+ *         },
+ *         tc:{
+ *           id: 'id',
+ *           name: 'great tc name'
+ *         },
+ *         step:{
+ *           id: 'id',
+ *           name: 'great step name'
+ *           typ: ('singel'| ''|)
+ *         }
+ *       }
+ *       data:{},
+ *       logLevel: LEVEL_INFO
+ *     }
+ */
