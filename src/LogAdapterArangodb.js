@@ -29,13 +29,13 @@ export class LogAdapterArangodb extends LogAdapterConsole {
     // The database Id of the run
     this.runKey = undefined
 
-    // stores all the id of the testcases
+    // stores all the ids of the testcases
     this.testcaseSet = new Set()
 
     // stores a combined key of testcase_id and step_id
     this.testcaseHasStepSet = new Set()
 
-    // stores all the id of the steps
+    // stores all the ids of the steps
     this.stepSet = new Set()
 
     // stores a md5 hash of the logged data
@@ -125,7 +125,10 @@ export class LogAdapterArangodb extends LogAdapterConsole {
     const currentStepCount = meta.step.countCurrent
 
     // If the step count increases, the old sets could be deleted
-    if (currentStepCount > this.lastStepCount) {
+    if (
+      this.lastStepCount === undefined ||
+      currentStepCount > this.lastStepCount
+    ) {
       // delete old values
       this.stepSet = new Set()
       this.testcaseHasStepSet = new Set()

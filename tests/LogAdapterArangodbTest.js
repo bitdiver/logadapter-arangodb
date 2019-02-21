@@ -243,7 +243,6 @@ test(
     await logAdapter.log(getStepLog({ message: 'my step message 2' }))
 
     const res = await retrieveData(logAdapter.db)
-    // console.log('res', res)
 
     // we expect that there is only one record
     expect(res.runData.length).toBe(1)
@@ -417,6 +416,7 @@ function getStepLog(opts = {}) {
     tcName: 'my test case',
     stepName: 'my step',
     stepType: 'normal',
+    currentStepCount: 1,
     ...opts,
   }
   return {
@@ -432,6 +432,7 @@ function getStepLog(opts = {}) {
       step: {
         id: options.stepId,
         name: options.stepName,
+        countCurrent: options.currentStepCount,
       },
     },
     data: {
