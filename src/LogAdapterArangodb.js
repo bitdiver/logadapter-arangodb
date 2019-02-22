@@ -156,11 +156,8 @@ export class LogAdapterArangodb extends LogAdapterConsole {
       })
     }
 
-    const dataString = JSON.stringify(data)
-    const dataMd5 = md5(dataString)
-    if (!this.stepDataSet.has(dataMd5)) {
-      this.stepDataSet.add(dataMd5)
-
+    if (meta.step.type === 'normal') {
+      // for a normal step we always log all
       // this is an additional log for this step
       const collection = this.db.collection('stepLog')
       const rec = await collection.save({ meta, data })
@@ -170,6 +167,21 @@ export class LogAdapterArangodb extends LogAdapterConsole {
         _from: `step/${stepKey}`,
         _to: rec._id,
       })
+    } else {
+      // Log the message for this step
+      const dataMd5 = md5(JSON.stringify(data))
+      if (meta.step.type === 'normal' || !this.stepDataSet.has(dataMd5)) {
+        this.stepDataSet.add(dataMd5)
+
+        const collection = this.db.collection('stepLog')
+        const rec = await collection.save({ meta, data })
+
+        const edgeCollection = this.db.collection('stepHasLog')
+        await edgeCollection.save({
+          _from: `step/${stepKey}`,
+          _to: rec._id,
+        })
+      }
     }
   }
 }

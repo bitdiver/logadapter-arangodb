@@ -1,4 +1,5 @@
 import { LogAdapterArangodb } from './LogAdapterArangodb'
+import { clearDatabase } from './helper'
 
 // Stores the logger instance
 let logAdapter
@@ -13,4 +14,4 @@ function getLogAdapter(opts) {
   return logAdapter
 }
 
-export { getLogAdapter, LogAdapterArangodb }
+export { getLogAdapter, LogAdapterArangodb, clearDatabase }
