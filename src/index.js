@@ -1,5 +1,5 @@
-import { clearDatabaseArangoDb } from './LogAdapterArangodb'
-import { clearDatabase } from './helper'
+import { LogAdapterArangodb } from './LogAdapterArangodb'
+import { clearDatabaseArangoDb } from './helper'
 
 // Stores the logger instance
 let logAdapter

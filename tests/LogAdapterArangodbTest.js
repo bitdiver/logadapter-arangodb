@@ -1,12 +1,12 @@
-import { getLogAdapter } from '../lib/index'
+import { getLogAdapterArangodb } from '../lib/index'
 
 // eslint-disable-next-line no-unused-vars
 import { getArangoDb, printCollections, retrieveData } from './helper'
-import { clearDatabase } from '../lib/helper'
+import { clearDatabaseArangoDb } from '../lib/helper'
 
 const TIMEOUT = 30000
 
-const logAdapter = getLogAdapter({
+const logAdapter = getLogAdapterArangodb({
   scheme: 'http',
   hostname: 'localhost',
   port: 8529,
@@ -16,7 +16,7 @@ const logAdapter = getLogAdapter({
 })
 
 logAdapter.logAdapterLogLevel = 'debug'
-// const logAdapter = getLogAdapter()
+// const logAdapter = getLogAdapterArangodb()
 
 test(
   'create a new logAdapter',
@@ -24,7 +24,7 @@ test(
     expect(logAdapter).not.toBeNull()
     await logAdapter.initDb()
     logAdapter.reset()
-    clearDatabase(logAdapter.db)
+    clearDatabaseArangoDb(logAdapter.db)
     done()
   },
   TIMEOUT
@@ -37,7 +37,7 @@ test(
   'Run: create a single entry',
   async done => {
     logAdapter.reset()
-    await clearDatabase(logAdapter.db)
+    await clearDatabaseArangoDb(logAdapter.db)
 
     await logAdapter.log(getRunLog())
 
@@ -70,7 +70,7 @@ test(
   'Run: create two entries',
   async done => {
     logAdapter.reset()
-    await clearDatabase(logAdapter.db)
+    await clearDatabaseArangoDb(logAdapter.db)
 
     await logAdapter.log(getRunLog())
     await logAdapter.log(getRunLog({ message: 'second entry' }))
@@ -109,7 +109,7 @@ test(
   'Testcase: create a single entry',
   async done => {
     logAdapter.reset()
-    await clearDatabase(logAdapter.db)
+    await clearDatabaseArangoDb(logAdapter.db)
 
     await logAdapter.log(getRunLog())
     await logAdapter.log(getTcLog())
@@ -144,7 +144,7 @@ test(
   'Testcase: create two entries',
   async done => {
     logAdapter.reset()
-    await clearDatabase(logAdapter.db)
+    await clearDatabaseArangoDb(logAdapter.db)
 
     await logAdapter.log(getRunLog())
     await logAdapter.log(getTcLog())
@@ -191,7 +191,7 @@ test(
   'Step: create single entry',
   async done => {
     logAdapter.reset()
-    await clearDatabase(logAdapter.db)
+    await clearDatabaseArangoDb(logAdapter.db)
 
     await logAdapter.log(getRunLog())
     await logAdapter.log(getTcLog())
@@ -234,7 +234,7 @@ test(
   'Step: create two entries',
   async done => {
     logAdapter.reset()
-    await clearDatabase(logAdapter.db)
+    await clearDatabaseArangoDb(logAdapter.db)
 
     await logAdapter.log(getRunLog())
     await logAdapter.log(getTcLog())
@@ -290,7 +290,7 @@ test(
   'Step: simulate single step',
   async done => {
     logAdapter.reset()
-    await clearDatabase(logAdapter.db)
+    await clearDatabaseArangoDb(logAdapter.db)
 
     await logAdapter.log(getRunLog())
     await logAdapter.log(getTcLog())
