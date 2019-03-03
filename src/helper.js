@@ -69,7 +69,7 @@ export async function setupArango(arangoDb, collectionOptions = {}) {
  * This is only usefull in testing environments to test the logger.
  * @param arangoDb {object} The connection to the ArangoDB
  */
-export async function clearDatabase(arangoDb) {
+export async function clearDatabaseArangoDb(arangoDb) {
   assert.ok(arangoDb, 'No database given')
   for (const definition of COLLECTIONS) {
     const collection = arangoDb.collection(definition.name)
