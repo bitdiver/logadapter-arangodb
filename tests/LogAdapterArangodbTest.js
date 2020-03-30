@@ -1,8 +1,8 @@
-import { getLogAdapterArangodb } from '../lib/index'
+import { getLogAdapterArangodb } from '../src/index'
 
 // eslint-disable-next-line no-unused-vars
 import { getArangoDb, printCollections, retrieveData } from './helper'
-import { clearDatabaseArangoDb } from '../lib/helper'
+import { clearDatabaseArangoDb } from '../src/helper'
 
 const TIMEOUT = 30000
 
@@ -20,7 +20,7 @@ logAdapter.logAdapterLogLevel = 'debug'
 
 test(
   'create a new logAdapter',
-  async done => {
+  async (done) => {
     expect(logAdapter).not.toBeNull()
     await logAdapter.initDb()
     logAdapter.reset()
@@ -35,7 +35,7 @@ test(
  */
 test(
   'Run: create a single entry',
-  async done => {
+  async (done) => {
     logAdapter.reset()
     await clearDatabaseArangoDb(logAdapter.db)
 
@@ -68,7 +68,7 @@ test(
  */
 test(
   'Run: create two entries',
-  async done => {
+  async (done) => {
     logAdapter.reset()
     await clearDatabaseArangoDb(logAdapter.db)
 
@@ -107,7 +107,7 @@ test(
 
 test(
   'Testcase: create a single entry',
-  async done => {
+  async (done) => {
     logAdapter.reset()
     await clearDatabaseArangoDb(logAdapter.db)
 
@@ -142,7 +142,7 @@ test(
 
 test(
   'Testcase: create two entries',
-  async done => {
+  async (done) => {
     logAdapter.reset()
     await clearDatabaseArangoDb(logAdapter.db)
 
@@ -189,7 +189,7 @@ test(
 
 test(
   'Step: create single entry',
-  async done => {
+  async (done) => {
     logAdapter.reset()
     await clearDatabaseArangoDb(logAdapter.db)
 
@@ -232,7 +232,7 @@ test(
 
 test(
   'Step: create two entries',
-  async done => {
+  async (done) => {
     logAdapter.reset()
     await clearDatabaseArangoDb(logAdapter.db)
 
@@ -288,7 +288,7 @@ test(
 
 test(
   'Step: simulate single step',
-  async done => {
+  async (done) => {
     logAdapter.reset()
     await clearDatabaseArangoDb(logAdapter.db)
 

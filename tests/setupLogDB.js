@@ -19,9 +19,7 @@ const arangoLog = {
   password: 'log',
 }
 
-const url = `${arangoSystem.scheme}://${arangoSystem.hostname}:${
-  arangoSystem.port
-}`
+const url = `${arangoSystem.scheme}://${arangoSystem.hostname}:${arangoSystem.port}`
 // eslint-disable-next-line no-console
 console.log(`Connect to '${url}'`)
 
@@ -50,7 +48,7 @@ db.createDatabase(arangoLog.database, [
     // eslint-disable-next-line no-console
     console.log('User rights setup')
   })
-  .catch(err => {
+  .catch((err) => {
     // eslint-disable-next-line no-console
     console.log(err)
   })

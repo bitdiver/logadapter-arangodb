@@ -30,7 +30,7 @@ export async function printCollections(db) {
   const collections = await db.listCollections()
   // eslint-disable-next-line no-console
   console.log('collections', collections)
-  collections.forEach(collection => {
+  collections.forEach((collection) => {
     // eslint-disable-next-line no-console
     console.log(`Collection => ${collection}`)
   })
