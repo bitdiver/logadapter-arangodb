@@ -60,7 +60,7 @@
 	"dependencies": {
 		"@babel/runtime": "7.9.6",
 		"@bitdiver/logadapter": "1.4.3",
-		"arangojs": "6.14.0",
+		"arangojs": "7.4.0",
 		"md5": "2.2.1"
 	}
 }
